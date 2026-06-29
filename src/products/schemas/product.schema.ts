@@ -7,16 +7,28 @@ export type ProductDocument = HydratedDocument<Product>;
   timestamps: true,
 })
 export class Product {
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    trim: true,
+  })
   name!: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    trim: true,
+  })
   description!: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    min: 0,
+  })
   price!: number;
 
-  @Prop({ default: 0 })
+  @Prop({
+    default: 0,
+    min: 0,
+  })
   stock!: number;
 }
 

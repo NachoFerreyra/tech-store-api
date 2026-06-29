@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateProductDto } from './dto/create-product.dto';
 import { Model } from 'mongoose';
 
 import { Product, ProductDocument } from './schemas/product.schema';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -20,17 +21,18 @@ export class ProductsService {
     return this.productModel.findById(id);
   }
 
-  async update(id: string, updateData: Partial<CreateProductDto>) {
-    return this.productModel.findByIdAndUpdate(id, updateData, {
+  async create(createProductDto: CreateProductDto) {
+    return this.productModel.create(createProductDto);
+  }
+
+  async update(id: string, updateProductDto: UpdateProductDto) {
+    return this.productModel.findByIdAndUpdate(id, updateProductDto, {
       returnDocument: 'after',
+      runValidators: true,
     });
   }
 
   async remove(id: string) {
     return this.productModel.findByIdAndDelete(id);
-  }
-
-  async create(createProductDto: CreateProductDto) {
-    return this.productModel.create(createProductDto);
   }
 }
