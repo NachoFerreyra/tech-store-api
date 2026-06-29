@@ -1,19 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { CreateProductDto } from './dto/create-product.dto';
+import { Model } from 'mongoose';
+
+import { Product, ProductDocument } from './schemas/product.schema';
 
 @Injectable()
 export class ProductsService {
-  findAll() {
-    return [
-      {
-        id: 1,
-        name: 'Mouse Gamer',
-        price: 15000,
-      },
-      {
-        id: 2,
-        name: 'Teclado Mecánico',
-        price: 35000,
-      },
-    ];
+  constructor(
+    @InjectModel(Product.name)
+    private readonly productModel: Model<ProductDocument>,
+  ) {}
+
+  async findAll() {
+    return this.productModel.find();
+  }
+
+  async create(createProductDto: CreateProductDto) {
+    return this.productModel.create(createProductDto);
   }
 }
