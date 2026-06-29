@@ -16,6 +16,20 @@ export class ProductsService {
     return this.productModel.find();
   }
 
+  async findOne(id: string) {
+    return this.productModel.findById(id);
+  }
+
+  async update(id: string, updateData: Partial<CreateProductDto>) {
+    return this.productModel.findByIdAndUpdate(id, updateData, {
+      returnDocument: 'after',
+    });
+  }
+
+  async remove(id: string) {
+    return this.productModel.findByIdAndDelete(id);
+  }
+
   async create(createProductDto: CreateProductDto) {
     return this.productModel.create(createProductDto);
   }
