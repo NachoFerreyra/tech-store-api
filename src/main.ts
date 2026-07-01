@@ -15,14 +15,17 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Tech Store API Ignacio Ferreyra')
-    .setDescription('API REST para la gestión de productos')
+    .setTitle('Tech Store API')
+    .setDescription('REST API built with NestJS, MongoDB and JWT Authentication')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('api', app, document);
+
+  app.enableCors();
 
   await app.listen(process.env.PORT ?? 3000);
 }
