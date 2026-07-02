@@ -8,10 +8,12 @@ import {
   Post,
 } from '@nestjs/common';
 import {
+  ApiTags,
   ApiOperation,
   ApiResponse,
-  ApiTags,
   ApiNotFoundResponse,
+  ApiBadRequestResponse,
+  ApiParam,
 } from '@nestjs/swagger';
 
 import { ProductsService } from './products.service';
@@ -38,6 +40,7 @@ export class ProductsController {
   @ApiOperation({
     summary: 'Obtener un producto por ID',
   })
+  @ApiParam({ name: 'id', description: 'ID del producto (MongoDB ObjectId)' })
   @ApiResponse({
     status: 200,
     description: 'Producto encontrado',
@@ -57,6 +60,9 @@ export class ProductsController {
     status: 201,
     description: 'Producto creado correctamente',
   })
+  @ApiBadRequestResponse({
+    description: 'Datos de producto inválidos',
+  })
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
@@ -65,12 +71,16 @@ export class ProductsController {
   @ApiOperation({
     summary: 'Actualizar un producto',
   })
+  @ApiParam({ name: 'id', description: 'ID del producto (MongoDB ObjectId)' })
   @ApiResponse({
     status: 200,
     description: 'Producto actualizado correctamente',
   })
   @ApiNotFoundResponse({
     description: 'Producto no encontrado',
+  })
+  @ApiBadRequestResponse({
+    description: 'Datos de actualización inválidos',
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
@@ -80,6 +90,7 @@ export class ProductsController {
   @ApiOperation({
     summary: 'Eliminar un producto',
   })
+  @ApiParam({ name: 'id', description: 'ID del producto (MongoDB ObjectId)' })
   @ApiResponse({
     status: 200,
     description: 'Producto eliminado correctamente',
