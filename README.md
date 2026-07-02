@@ -103,6 +103,7 @@ Crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
 PORT=3000
 MONGODB_URI=mongodb+srv://<usuario>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
 JWT_SECRET=tu-clave-secreta-aqui
+ADMIN_SECRET=tu-clave-admin-secreta-aqui
 ```
 
 | Variable | Descripción | Ejemplo |
@@ -110,6 +111,7 @@ JWT_SECRET=tu-clave-secreta-aqui
 | `PORT` | Puerto donde corre la API | `3000` |
 | `MONGODB_URI` | Connection string de MongoDB Atlas | `mongodb+srv://...` |
 | `JWT_SECRET` | Clave secreta para firmar tokens JWT | `mi-clave-secreta-123` |
+| `ADMIN_SECRET` | Clave para crear cuentas de administrador | `mi-admin-secret-456` |
 
 ---
 
@@ -142,6 +144,7 @@ La API estará disponible en `http://localhost:3000`.
 | Método | Ruta | Descripción | Auth |
 |---|---|---|---|
 | `POST` | `/auth/register` | Registrar un nuevo usuario | ❌ No |
+| `POST` | `/auth/register-admin` | Registrar un administrador (requiere `x-admin-secret` header) | ❌ No* |
 | `POST` | `/auth/login` | Iniciar sesión (devuelve JWT) | ❌ No |
 
 ### Products
@@ -195,7 +198,22 @@ POST /auth/login
 }
 ```
 
-### 3. Usar el token en endpoints protegidos
+### 3. Crear un administrador
+
+```bash
+POST /auth/register-admin
+Headers: { "x-admin-secret": "tu-clave-admin-secreta-aqui" }
+
+{
+  "name": "Admin",
+  "email": "admin@email.com",
+  "password": "password123"
+}
+```
+
+> ⚠️ Sin el header `x-admin-secret` correcto, el endpoint devuelve `401 Unauthorized`.
+
+### 4. Usar el token en endpoints protegidos
 
 Agregar el token en el header `Authorization`:
 
@@ -250,7 +268,8 @@ tech-store-api/
 │   │   └── products.service.ts          # Servicio de productos
 │   ├── users/
 │   │   ├── dto/
-│   │   │   └── create-user.dto.ts       # DTO para crear usuario
+│   │   │   ├── create-user.dto.ts       # DTO interno para crear usuario (con rol)
+│   │   │   └── register-user.dto.ts     # DTO público de registro (sin rol)
 │   │   ├── schemas/
 │   │   │   └── user.schema.ts           # Schema de Mongoose para User
 │   │   ├── users.controller.ts          # Controller de usuarios
