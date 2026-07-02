@@ -2,7 +2,13 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getHello() {
+    return {
+      name: 'Tech Store API',
+      version: '1.0.0',
+      status: 'online',
+      documentation: '/api',
+      author: 'Ignacio Ferreyra',
+    };
   }
 }

@@ -5,12 +5,12 @@ import { AppService } from './app.service';
 @ApiTags('Health')
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @ApiOperation({ summary: 'Health check' })
   @ApiResponse({ status: 200, description: 'La API está funcionando correctamente' })
   @Get()
-  getHello(): string {
+  getHello() {
     return this.appService.getHello();
   }
 }
