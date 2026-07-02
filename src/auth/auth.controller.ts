@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -15,7 +15,7 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @ApiOperation({ summary: 'Registrar un nuevo usuario' })
   @ApiResponse({
@@ -37,6 +37,7 @@ export class AuthController {
   @ApiBadRequestResponse({ description: 'Datos de login inválidos' })
   @ApiUnauthorizedResponse({ description: 'Credenciales incorrectas' })
   @Post('login')
+  @HttpCode(HttpStatus.OK)
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto.email, loginDto.password);
   }
