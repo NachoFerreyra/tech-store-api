@@ -84,7 +84,7 @@ Cada módulo encapsula sus propios controllers, services, DTOs y schemas, promov
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/tu-usuario/tech-store-api.git
+git clone https://github.com/NachoFerreyra/tech-store-api
 
 # 2. Entrar al directorio
 cd tech-store-api
@@ -217,21 +217,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ## 🌐 Deploy
 
-> **URL del deploy:** `https://tu-url-de-deploy.com`
-
-## 📸 Capturas sugeridas
-
-> Para completar la presentación del proyecto, se recomienda agregar capturas de:
->
-> 1. **Swagger UI** — Vista general de los endpoints (`/api`)
-> 2. **Swagger Authorize** — Modal del botón Authorize con Bearer token
-> 3. **POST /auth/register** — Ejemplo de registro exitoso
-> 4. **POST /auth/login** — Ejemplo de login con respuesta del token
-> 5. **GET /users (protegido)** — Respuesta exitosa con token de admin
-> 6. **GET /users (sin token)** — Respuesta 401 Unauthorized
-> 7. **MongoDB Atlas** — Vista del cluster con las colecciones
-
----
+> **URL del deploy:** `https://tech-store-api-hja3.onrender.com/`
+> **Documentación interactiva:** `https://tech-store-api-hja3.onrender.com/api`
 
 ## 📁 Estructura del proyecto
 
