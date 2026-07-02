@@ -1,7 +1,7 @@
 # 🛒 Tech Store API | Ignacio Ferreyra
 
 <p align="center">
-  <img src="https://nestjs.com/img/logo-small.svg" width="80" alt="NestJS Logo" />
+  <img src="https://raw.githubusercontent.com/nestjs/nest/master/sample/24-serve-static/client/logo.svg" width="80" alt="NestJS Logo" />
 </p>
 
 <p align="center">
@@ -218,7 +218,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ## 🌐 Deploy
 
 > **URL del deploy:** `https://tech-store-api-hja3.onrender.com/`
+>
 > **Documentación interactiva:** `https://tech-store-api-hja3.onrender.com/api`
+
 
 ## 📁 Estructura del proyecto
 
